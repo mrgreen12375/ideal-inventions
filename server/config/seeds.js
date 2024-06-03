@@ -20,7 +20,28 @@ db.once('open', async () => {
       image: "https://cdn.pixabay.com/photo/2020/04/23/19/05/star-wars-5083664_1280.jpg",
       price: 49.99,
       inventory: 100
-    }
+    },
+    {
+      name: "Hover Board",
+      description: "This is a levitating board used for personal transportation.",
+      image: "https://cdn.thisiswhyimbroke.com/thumb/back-to-the-future-hoverboard-replica_400x333.jpg",
+      price: 29.99,
+      inventory: 300
+    },
+    {
+      name: "Laser Gun",
+      description: "This laser gun emits highly Focused beams of light that deal fire damage. These beams can pass through glass and other transparent physical barriers, dealing damage to such barriers as they pass through.",
+      image: "https://m.media-amazon.com/images/I/61nj3EBtcxL._AC_UF350,350_QL50_.jpg",
+      price: 89.99,
+      inventory: 100
+    },
+    {
+      name: "Spaceship",
+      description: "This spaceship is a vehicle that is designed to fly in outer space and operate there. Spacecraft are used for a variety of purposes, including communications, Earth observation, meteorology, navigation, space colonization, planetary exploration, and transportation of humans and cargo.",
+      image: "https://img.freepik.com/free-photo/view-spaceship-from-future_23-2150675455.jpg",
+      price: 999.99,
+      inventory: 5
+    },
   ]);
 
   console.log('inventions seeded');

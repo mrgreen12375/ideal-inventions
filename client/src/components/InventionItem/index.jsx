@@ -41,13 +41,15 @@ function InventionItem({invention}) {
         <h3>{invention.name}</h3>
         <img src={`${invention.image}`} />
       </Link>
-      <div>
+      <div className='details'>
         <div>
-          {invention.inventory} in stock
+          <h4 className='stock'>{invention.inventory} in stock</h4>
+          <h4>${invention.price}</h4>
         </div>
-        <span>${invention.price}</span>
+        <div>
+          <button>Add to cart</button>
+        </div>
       </div>
-      <button>Add to cart</button>
     </div>
   );
 }
