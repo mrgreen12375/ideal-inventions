@@ -1,60 +1,48 @@
-const { User } = require('../models');
+const { User, Invention, History } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-//     categories: async () => {
-//       return await Category.find();
-//     },
-//     products: async (parent, { category, name }) => {
-//       const params = {};
-
-//       if (category) {
-//         params.category = category;
-//       }
-
-//       if (name) {
-//         params.name = {
-//           $regex: name,
-//         };
-//       }
-
-//       return await Product.find(params).populate('category');
-//     },
-//     product: async (parent, { _id }) => {
-//       return await Product.findById(_id).populate('category');
-//     },
-
-    user: async () => {
-        return User.find();
+    inventions: async () => {
+      const invetions = await Invention.find();
+      return invetions;
     },
-    // user: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id).populate({
-    //       path: 'history.inventions',
-    //       populate: 'invention',
-    //     });
+    invention: async (parent, { _id }) => {
+      const invention = await Invention.findById(_id);
+      return invention;
+    },
 
-    //     user.history.sort((a, b) => b.purchaseDate - a.purchaseDate);
+    users: async () => {
+        const users = await User.find()
+        return users;
+    },
+    user: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'history.inventions',
+          populate: 'invention',
+        });
 
-    //     return user;
-    //   }
+        user.history.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
-    //   throw AuthenticationError;
-    // },
-    // order: async (parent, { _id }, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id).populate({
-    //       path: 'orders.products',
-    //       populate: 'category',
-    //     });
+        return user;
+      }
 
-    //     return user.orders.id(_id);
-    //   }
+      throw AuthenticationError;
+    },
+    history: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'history.inventions',
+          populate: 'invention',
+        });
 
-    //   throw AuthenticationError;
-    // },
+        return user.history.id(_id);
+      }
+
+      throw AuthenticationError;
+    },
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
     //   // We map through the list of products sent by the client to extract the _id of each item and create a new Order.
@@ -91,22 +79,25 @@ const resolvers = {
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
-
       return { token, user };
     },
-    // addOrder: async (parent, { products }, context) => {
-    //   if (context.user) {
-    //     const order = new Order({ products });
+    addInvention: async (parent, args) => {
+      const invention = await Invention.create(args);
+      return { invention };
+    },
+    addHistory: async (parent, { inventions }, context) => {
+      if (context.user) {
+        const order = new History({ inventions });
 
-    //     await User.findByIdAndUpdate(context.user._id, {
-    //       $push: { orders: order },
-    //     });
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { history: order },
+        });
 
-    //     return order;
-    //   }
+        return order;
+      }
 
-    //   throw AuthenticationError;
-    // },
+      throw AuthenticationError;
+    },
     // updateUser: async (parent, args, context) => {
     //   if (context.user) {
     //     return await User.findByIdAndUpdate(context.user._id, args, {
