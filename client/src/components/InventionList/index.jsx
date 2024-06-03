@@ -9,9 +9,8 @@ function InventionList() {
 
   console.log(invention)
   return (
-    <div className="my-2">
-      <h2>Our Products:</h2>
-        <div className="flex-row">
+    <div className='inventionList'>
+        <div>
             {invention.map((invention) => (
               <InventionItem key={invention._id} invention={invention} />
             ))}
