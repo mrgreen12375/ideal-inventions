@@ -4,12 +4,12 @@ import './index.css'
 import './App.css'
 
 import Home from './pages/Home';
-// import Detail from './pages/Detail';
+import Details from './pages/Details';
 import NoMatch from './pages/NoMatch';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 // import Success from './pages/Success';
-// import OrderHistory from './pages/OrderHistory';
+import History from './pages/History';
 import App from './App.jsx'
 
 const router = createBrowserRouter([
@@ -21,6 +21,22 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/signup',
+        element: <Signup />
+      },
+      {
+        path: '/history',
+        element: <History />
+      },
+      {
+        path: '/invention/:id',
+        element: <Details />
       }
     ]
   }
