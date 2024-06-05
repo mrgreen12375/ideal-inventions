@@ -8,19 +8,19 @@ function History() {
   let user;
 
   if (data) {
-    user = data.users[0];
+    user = data?.users[0];
   }
   console.log(user)
   return (
     <>
       <div className="historyCard">
         <div className='back'>
-          <Link to="/">← Back to Products</Link>
+          <Link to="/">← Back to Inventions</Link>
         </div>
         {user ? (
           <>
             <h2>
-              Order History for {user.firstName} {user.lastName}
+              Order History
             </h2>
             {user.history.map((order) => (
               <div key={order._id}>

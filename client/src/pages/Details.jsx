@@ -27,7 +27,7 @@ function Detail() {
       <div className='back'>
         <Link to="/">← Back to Inventions</Link>
       </div>
-      <h2>Order Details</h2>
+      <h2>Invention Details</h2>
       <h3>{currentProduct.name}</h3>
       <div className='center'>
         <h4>{currentProduct.description}</h4>

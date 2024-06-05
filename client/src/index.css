@@ -8,11 +8,19 @@ header {
 
 header nav ul {
   display: flex;
-  gap: 20px;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 header nav ul li {
   list-style: none;
+}
+header nav ul li span {
+  position: relative;
+  top: 3px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 header nav ul li a {
@@ -225,4 +233,73 @@ h2 {
 
 .historyDetails a:hover{
   border: 1px solid #000000;
+}
+
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loginCard h2 {
+  position: relative;
+  bottom: 40px;
+}
+
+.loginCard form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 20%;
+  gap: 10px;
+}
+
+.loginInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.loginInput input {
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 3px 8px 3px 8px;
+  width: 170px;
+}
+
+.loginButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loginButton button {
+  color: white;
+  background-color: #000000;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.loginButton button:hover {
+  background-color: red;
+}
+
+.loginButton a {
+  color: #000000;
+}
+
+.loginButton a:hover {
+  color: red;
+  text-decoration: none;
 }
