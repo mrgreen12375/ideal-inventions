@@ -36,24 +36,22 @@ export const QUERY_CHECKOUT = gql`
 
 
 export const QUERY_USER = gql`
-query Query {
-  users {
-    _id
-    firstName
-    lastName
-    email
-    history {
-      _id
-      purchaseDate
-      inventions {
+  {
+    user {
+      firstName
+      lastName
+      history {
         _id
-        name
-        description
-        image
-        inventory
-        price
+        purchaseDate
+        inventions {
+          _id
+          name
+          description
+          image
+          price
+          inventory
+        }
       }
     }
   }
-}
 `;

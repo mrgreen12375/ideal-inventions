@@ -19,10 +19,7 @@ const resolvers = {
     },
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'history.inventions',
-          populate: 'invention',
-        });
+        const user = await User.findById(context.user._id).populate('invention');
 
         user.history.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
@@ -33,10 +30,7 @@ const resolvers = {
     },
     history: async (parent, { _id }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'history.inventions',
-          populate: 'invention',
-        });
+        const user = await User.findById(context.user._id).populate('invention');
 
         return user.history.id(_id);
       }

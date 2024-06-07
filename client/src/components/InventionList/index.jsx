@@ -1,22 +1,70 @@
-
-import InventionItem from '../InventionItem';
+import { useEffect } from 'react';
+import { useStoreContext } from '../../utils/GlobalState';
+import { UPDATE_INVENTIONS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
+import { idbPromise } from '../../utils/helpers';
+import InventionItem from '../InventionItem';
 import { QUERY_INVENTION } from '../../utils/queries';
 
 function InventionList() {
-  const { loading, data } = useQuery(QUERY_INVENTION);
-  const invention = data?.inventions || [];
 
-  console.log(invention)
+  const [ state, dispatch] = useStoreContext();
+
+  const { currentInvention } = state;
+
+
+  const { loading, data } = useQuery(QUERY_INVENTION);
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_INVENTIONS,
+        inventions: data.inventions,
+      });
+      data.inventions.forEach((inventions) => {
+        idbPromise('inventions', 'put', inventions);
+      });
+    } else if (!loading) {
+      idbPromise('inventions', 'get').then((inventions) => {
+        dispatch({
+          type: UPDATE_INVENTIONS,
+          inventions: inventions,
+        });
+      });
+    }
+  }, [data, loading, dispatch]);
+
+  function filterInventions() {
+    if (!currentInvention) {
+      return state.inventions;
+    }
+
+    return state.inventions.filter(
+      (inventions) => inventions._id === currentInvention
+    );
+  }
+
+  console.log('state', state.inventions)
   return (
     <div>
       <h2>Shop Inventions</h2>
-        <div className='inventionList'>
-            {invention.map((invention) => (
-              <InventionItem key={invention._id} invention={invention} />
-            ))}
+      {state.inventions.length ? (
+        <div className="inventionList">
+          {filterInventions().map((inventions) => (
+            <InventionItem
+              key={inventions._id}
+              _id={inventions._id}
+              image={inventions.image}
+              name={inventions.name}
+              price={inventions.price}
+              inventory={inventions.inventory}
+            />
+          ))}
         </div>
-      {loading ? <p>Loading</p> : null}
+      ) : (
+        <h3>You haven't added any products yet!</h3>
+      )}
+      {loading ? <p>loading...</p> : null}
     </div>
   );
 }
