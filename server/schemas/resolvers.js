@@ -43,37 +43,37 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    // checkout: async (parent, args, context) => {
-    //   const url = new URL(context.headers.referer).origin;
-    //   // We map through the list of products sent by the client to extract the _id of each item and create a new Order.
-    //   await Order.create({ products: args.products.map(({ _id }) => _id) });
-    //   const line_items = [];
+    checkout: async (parent, args, context) => {
+      const url = new URL(context.headers.referer).origin;
+      // We map through the list of products sent by the client to extract the _id of each item and create a new Order.
+      await History.create({ inventions: args.inventions.map(({ _id }) => _id) });
+      const line_items = [];
 
-    //   for (const product of args.products) {
-    //     line_items.push({
-    //       price_data: {
-    //         currency: 'usd',
-    //         product_data: {
-    //           name: product.name,
-    //           description: product.description,
-    //           images: [`${url}/images/${product.image}`],
-    //         },
-    //         unit_amount: product.price * 100,
-    //       },
-    //       quantity: product.purchaseQuantity,
-    //     });
-    //   }
+      for (const invention of args.inventions) {
+        line_items.push({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: invention.name,
+              description: invention.description,
+              images: invention.image,
+            },
+            unit_amount: invention.price * 100,
+          },
+          quantity: invention.purchaseQuantity,
+        });
+      }
 
-    //   const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ['card'],
-    //     line_items,
-    //     mode: 'payment',
-    //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-    //     cancel_url: `${url}/`,
-    //   });
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+      });
 
-    //   return { session: session.id };
-    // },
+      return { session: session.id };
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -98,24 +98,24 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-    // updateUser: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return await User.findByIdAndUpdate(context.user._id, args, {
-    //       new: true,
-    //     });
-    //   }
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
 
-    //   throw AuthenticationError;
-    // },
-    // updateProduct: async (parent, { _id, quantity }) => {
-    //   const decrement = Math.abs(quantity) * -1;
+      throw AuthenticationError;
+    },
+    updateInvention: async (parent, { _id, quantity }) => {
+      const decrement = Math.abs(quantity) * -1;
 
-    //   return await Product.findByIdAndUpdate(
-    //     _id,
-    //     { $inc: { quantity: decrement } },
-    //     { new: true }
-    //   );
-    // },
+      return await Invention.findByIdAndUpdate(
+        _id,
+        { $inc: { quantity: decrement } },
+        { new: true }
+      );
+    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
