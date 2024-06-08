@@ -2,21 +2,23 @@
   position: fixed;
   top: 0;
   right: 0;
-  min-width: 20%;
-  max-width: 30%;
+  width: 17%;
   max-height: 60%;
-  background-color: var(--light);
+  background-color: white;
   overflow: auto;
-  padding: .5rem;
+  padding: 10px;
+  margin: 10px;
   box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
-  border-bottom-left-radius: .5rem;
+  border-radius: 5px;
 }
 
-.cart h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid var(--dark);
-  padding-bottom: .5rem;
-  margin: 1rem 0;
+.cart h3 {
+  border-bottom: 1px solid #000000;
+  padding-bottom: 10px;
+}
+
+.cart h4 {
+  text-align: center;
 }
 
 .cart .close {
@@ -24,7 +26,7 @@
   top: .5rem;
   right: .5rem;
   cursor: pointer;
-  color: var(--tertiary);
+  color: #000000;
 }
 
 .cart .close:hover {
@@ -33,13 +35,9 @@
 
 .cart-closed {
   position: fixed;
-  top: 2%;
+  top: 1%;
   right: 1%;
-  font-size: 2rem;
   cursor: pointer;
-  background-color: var(--secondary);
-  border-radius: 50%;
-  padding: .25rem;
   width: 50px;
   height: 50px;
 }
@@ -48,15 +46,56 @@
   transform: rotate(8deg);
 }
 
+.cart-closed img {
+  height: 50px;
+  width: 50px;
+}
+
 .cart img {
-  width: 70px;
-  margin-right: 1rem;
+  height: 50px;
+  width: 50px;
 }
 
 .cart input {
   width: 50px;
   padding: 0;
-  margin: 0 .5rem 1rem 0;
+}
+
+.trash:hover {
+  cursor: pointer;
+}
+
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.checkoutContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkoutContainer button {
+  color: white;
+  background-color: #000000;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
+}
+
+.checkoutContainer button:hover {
+  background-color: red;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

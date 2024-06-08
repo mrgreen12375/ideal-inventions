@@ -27,7 +27,7 @@ query Query($id: ID!) {
 `;
 
 export const QUERY_CHECKOUT = gql`
-  query getCheckout($inventions: [ID]!) {
+  query getCheckout($inventions: [InventionInput]) {
     checkout(inventions: $inventions) {
       session
     }

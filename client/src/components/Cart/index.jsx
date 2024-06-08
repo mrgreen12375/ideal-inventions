@@ -65,9 +65,7 @@ const Cart = () => {
   if (!state.cartOpen) {
     return (
       <div className="cart-closed" onClick={toggleCart}>
-        <span role="img" aria-label="trash">
-          🛒
-        </span>
+        <img src='https://images.emojiterra.com/google/noto-emoji/unicode-15/bw/512px/1f6d2.png' />
       </div>
     );
   }
@@ -77,31 +75,28 @@ const Cart = () => {
       <div className="close" onClick={toggleCart}>
         [close]
       </div>
-      <h2>Shopping Cart</h2>
+      <h3>Shopping Cart</h3>
       {state.cart.length ? (
-        <div>
+        <div className='cartContainer'>
           {state.cart.map((item) => (
             <CartItem key={item._id} item={item} />
           ))}
 
-          <div className="flex-row space-between">
+          <div className="checkoutContainer">
             <strong>Total: ${calculateTotal()}</strong>
 
             {/* Check to see if the user is logged in. If so render a button to check out */}
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
             ) : (
-              <span>(log in to check out)</span>
+              <span>(login to checkout)</span>
             )}
           </div>
         </div>
       ) : (
-        <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
-        </h3>
+        <h4>
+          No Items In Cart!
+        </h4>
       )}
     </div>
   );

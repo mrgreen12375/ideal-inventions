@@ -35,7 +35,7 @@ const CartItem = ({ item }) => {
   }
 
   return (
-    <div className="flex-row">
+    <div className="cartItem">
       <div>
         <img
           src={`${item.image}`}
@@ -53,6 +53,7 @@ const CartItem = ({ item }) => {
             onChange={onChange}
           />
           <span
+            className="trash"
             role="img"
             aria-label="trash"
             onClick={() => removeFromCart(item)}
