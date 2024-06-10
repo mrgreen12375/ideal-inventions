@@ -8,7 +8,7 @@ import Details from './pages/Details';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-// import Success from './pages/Success';
+import Success from './pages/Success';
 import History from './pages/History';
 import App from './App.jsx'
 
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Signup />
+      },
+      {
+        path: '/success',
+        element: <Success />
       },
       {
         path: '/history',
