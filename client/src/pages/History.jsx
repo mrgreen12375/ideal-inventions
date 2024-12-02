@@ -8,7 +8,7 @@ function History() {
   let user;
 
   if (data) {
-    user = data?.users;
+    user = data?.user;
   }
   console.log(user)
   return (
