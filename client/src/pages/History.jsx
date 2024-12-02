@@ -11,6 +11,8 @@ function History() {
     user = data?.user;
   }
 
+  console.log(user);
+
   return (
     <>
       <div className="historyCard">

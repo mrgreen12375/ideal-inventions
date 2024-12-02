@@ -6,7 +6,7 @@ db.once('open', async () => {
   await cleanDB('Invention', 'inventions');
   await cleanDB('User', 'users');
 
-  const invetions = await Invention.insertMany([
+  const inventions = await Invention.insertMany([
     {
       name: "Time Machine",
       description: "This is an all in one time machine. Set the date past or future and hit the red button. The time machine with send you to this date in less than 5 seconds.",
@@ -53,26 +53,10 @@ db.once('open', async () => {
     password: 'password',
     history: [
       {
-        inventions: [
-          {
-            _id: invetions[0]._id, 
-            name: invetions[0].name,
-            description: invetions[0].description,
-            image: invetions[0].image,
-            price: invetions[0].price,
-            inventory: invetions[0].inventory,
-          },
-          {
-            _id: invetions[1]._id, 
-            name: invetions[1].name,
-            description: invetions[1].description,
-            image: invetions[1].image,
-            price: invetions[1].price,
-            inventory: invetions[1].inventory,
-          }
-        ]
+        inventions: [inventions[0]._id, inventions[1]._id]
       }
     ]
+
   });
 
   await User.create({

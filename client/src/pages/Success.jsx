@@ -5,17 +5,17 @@ import { ADD_HISTORY } from '../utils/mutations';
 import { idbPromise } from '../utils/helpers';
 
 function Success() {
-  const [addOrder] = useMutation(ADD_HISTORY);
+  const [addHistory] = useMutation(ADD_HISTORY);
 
   useEffect(() => {
     async function saveOrder() {
       const cart = await idbPromise('cart', 'get');
-      const invention = cart.map((item) => item._id);
+      const inventions = cart.map((item) => item._id);
 
-      if (invention.length) {
-        const { data } = await addOrder({ variables: { invention } });
+      if (inventions.length) {
+        const { data } = await addHistory({ variables: { inventions } });
         console.log(data);
-        const inventionData = data.addOrder.invention;
+        const inventionData = data.addHistory.inventions;
 
         console.log(data)
 
@@ -25,12 +25,12 @@ function Success() {
       }
 
       setTimeout(() => {
-        window.location.assign('/');
+        window.location.replace('/');
       }, 3000);
     }
 
     saveOrder();
-  }, [addOrder]);
+  }, [addHistory]);
 
   return (
     <div>

@@ -5,8 +5,8 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const resolvers = {
   Query: {
     inventions: async () => {
-      const invetions = await Invention.find();
-      return invetions;
+      const inventions = await Invention.find();
+      return inventions;
     },
     invention: async (parent, { _id }) => {
       const invention = await Invention.findById(_id);
@@ -50,7 +50,7 @@ const resolvers = {
             product_data: {
               name: invention.name,
               description: invention.description,
-              images: invention.image,
+              images: [`${url}/images/${invention.image}`],
             },
             unit_amount: invention.price * 100,
           },
