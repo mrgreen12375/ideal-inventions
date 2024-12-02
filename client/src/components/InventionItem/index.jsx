@@ -39,8 +39,6 @@ function InventionItem(item) {
     }
   }
 
-  console.log("check", item)
-
   return (
     <div className='card'> 
       <Link to={`/invention/${_id}`}>

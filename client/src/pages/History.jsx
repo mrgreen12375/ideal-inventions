@@ -10,7 +10,7 @@ function History() {
   if (data) {
     user = data?.user;
   }
-  console.log(user)
+
   return (
     <>
       <div className="historyCard">
@@ -22,13 +22,13 @@ function History() {
             <h2>
               Order History
             </h2>
-            {user.history.map((order) => (
-              <div key={order._id}>
+            {user.history.map((history) => (
+              <div key={history._id}>
                 <h3>
-                  {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
+                  {new Date(parseInt(history.purchaseDate)).toLocaleDateString()}
                 </h3>
                 <div >
-                  {order.inventions.map(({ _id, image, name, price }, index) => (
+                  {history.inventions.map(({ _id, image, name, price }, index) => (
                     <div key={index} className="historyDetails">
                       <Link to={`/invention/${_id}`}>
                         <img alt={name} src={`${image}`} />

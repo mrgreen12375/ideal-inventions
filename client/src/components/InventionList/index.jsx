@@ -44,7 +44,6 @@ function InventionList() {
     );
   }
 
-  console.log('state', state.inventions)
   return (
     <div>
       <h2>Shop Inventions</h2>
