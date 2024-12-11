@@ -28,7 +28,7 @@ This is an e-commerce app to sale inventions.
 ## Installation
 - npm run install
 
-## usage
+## Usage
 - npm run seed
 - npm run develop
 
