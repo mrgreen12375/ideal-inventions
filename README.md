@@ -26,16 +26,16 @@ This is an e-commerce app to sale inventions.
 ![ideal inventions landing page](./client/src/assets/ideal-inventions.png)
 
 ## Installation
-npm run install
+- npm run install
 
-## 
-npm run seed
-npm run develop
+## usage
+- npm run seed
+- npm run develop
 
 ## Deployment Links
-[Heroku](https://ideal-inventions-bfdeb806078f.herokuapp.com/)
+- [Heroku](https://ideal-inventions-bfdeb806078f.herokuapp.com/)
 
-[GitHub](https://github.com/mrgreen12375/ideal-inventions)
+- [GitHub](https://github.com/mrgreen12375/ideal-inventions)
 
 ## Contact
 - [Steven Green](https://github.com/mrgreen12375)
