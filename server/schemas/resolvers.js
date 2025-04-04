@@ -1,6 +1,6 @@
 const { User, Invention, History } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('sk_test_51RA1sCROcOxKW9HednVmPoIAx41eUPVLC4pkwmOemJFCYWSX2fugygtI29GmLPKroKgBqeoXiPRvp6yOswzcL0n900SX744baf');
 
 const resolvers = {
   Query: {
